@@ -5,11 +5,12 @@ unit PretsHypothecairesRuleUnitData;
 import ca.uqam.mgl7460.tp3.ressources.types.domaine.Propriete;
 import ca.uqam.mgl7460.tp3.ressources.types.domaine.Resultat;
 import ca.uqam.mgl7460.tp3.ressources.types.domaine.DemandePret;
+import ca.uqam.mgl7460.tp3.ressources.drools.UtilitaireRegles;
 
 rule "La demande de prêt dépasse le seuil pour le ratio emprunt/valeur"
 when
-	$demande: DemandePret($montantPret: montantPret);
-    $propriete: Propriete($valeurDeMarche : valeurDeMarche, $montantPret/$valeurDeMarche > UtilitaireRegles.MAX_RATIO_EMPRUNT_VALEUR) from $demande.getPropriete();
+	$demande: DemandePret($montantPret: montantPret)
+    $propriete: Propriete($valeurDeMarche : valeurDeMarche, $montantPret/$valeurDeMarche > UtilitaireRegles.MAX_RATIO_EMPRUNT_VALEUR) from $demande.getPropriete()
 then
 	// ajouter un message disant que le montant de pret est trop élevé pour la valeur de marché
     $demande.getResultatTraitement().setResultat(Resultat.REFUSEE);
@@ -19,7 +20,7 @@ end
 
 rule "Le montant de mise de fonds est trop faible par rapport au prêt"
 when
-	$demande: DemandePret(montantMiseDeFonds/montantPret < UtilitaireRegles.MIN_POURCENTAGE_MISE_FONDS);
+	$demande: DemandePret(montantMiseDeFonds/montantPret < UtilitaireRegles.MIN_POURCENTAGE_MISE_FONDS)
 then
 	// ajouter un message disant que le montant de mise de fonds est trop faible par rapport au pret
     $demande.getResultatTraitement().setResultat(Resultat.REFUSEE);

@@ -7,3 +7,16 @@ import ca.uqam.mgl7460.tp3.ressources.types.processus.instances.InstanceProcessu
 import ca.uqam.mgl7460.tp3.ressources.types.processus.instances.EtatTraitement;
 import ca.uqam.mgl7460.tp3.ressources.types.processus.instances.EtatProcessus;
 import ca.uqam.mgl7460.tp3.ressources.types.domaine.DemandePret;
+import ca.uqam.mgl7460.tp3.ressources.types.processus.definitions.DefinitionTransition;
+import ca.uqam.mgl7460.tp3.ressources.types.processus.definitions.DefinitionTache;
+
+rule "Transition refuse"
+    when
+        $transition: DefinitionTransition()
+        $proc: InstanceProcessus()
+        $tacheSource: DefinitionTache()
+        DemandePret(resultatTraitement.resultat != Resultat.ACCEPTEE) from $proc.getDemandePret()
+    then
+         System.out.println("transition refuse rule fired!: " + $transition.getID());
+         $transition.setIsPass(true);
+end

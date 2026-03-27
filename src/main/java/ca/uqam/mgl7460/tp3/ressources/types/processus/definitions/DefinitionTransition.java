@@ -52,6 +52,8 @@ public interface DefinitionTransition extends ObjetIdentifiable {
      */
     public String getNomFichierRegles();
 
+    public void setIsPass(boolean isPass);
+
     /**
      * cette méthode incarne le comportement de la transition. Elle prend l'instance
      * de processus englobant, à partir de laquelle elle pourra accéder à l'état

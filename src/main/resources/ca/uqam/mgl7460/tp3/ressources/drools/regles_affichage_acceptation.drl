@@ -9,7 +9,7 @@ import ca.uqam.mgl7460.tp3.ressources.types.domaine.DemandePret;
 
 rule "Félicitations - votre demande a été acceptée"
 when
-	$demande: DemandePret(resultatTraitement.resultat == Resultat.ACCEPTEE);
+	$demande: DemandePret(resultatTraitement.resultat == Resultat.ACCEPTEE)
 then
     System.out.println("Félicitations! votre demande a été acceptée");
 	System.out.println("Exécution de la règle " + kcontext.getRule().getName());

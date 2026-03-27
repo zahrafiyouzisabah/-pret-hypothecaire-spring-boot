@@ -3,7 +3,20 @@ package ca.uqam.mgl7460.tp3.ressources.drools;
 unit PretsHypothecairesRuleUnitData;
 
 import ca.uqam.mgl7460.tp3.ressources.types.domaine.Resultat;
-import ca.uqam.mgl7460.tp3.ressources.types.processus.instances.InstanceProcessus;
-import ca.uqam.mgl7460.tp3.ressources.types.processus.instances.EtatTraitement;
-import ca.uqam.mgl7460.tp3.ressources.types.processus.instances.EtatProcessus;
+import ca.uqam.mgl7460.tp3.ressources.types.domaine.Propriete;
+import ca.uqam.mgl7460.tp3.ressources.types.domaine.ProvinceOuTerritoire;
 import ca.uqam.mgl7460.tp3.ressources.types.domaine.DemandePret;
+import ca.uqam.mgl7460.tp3.ressources.types.processus.definitions.DefinitionTransition;
+import ca.uqam.mgl7460.tp3.ressources.types.processus.definitions.DefinitionTache;
+import ca.uqam.mgl7460.tp3.ressources.types.processus.instances.InstanceProcessus;
+
+rule "Transition accepte"
+    when
+        $transition: DefinitionTransition()
+        $proc: InstanceProcessus()
+        $tacheSource: DefinitionTache()
+        DemandePret(resultatTraitement.resultat == Resultat.ACCEPTEE) from $proc.getDemandePret()
+    then
+         System.out.println("transition accepte rule fired! : " + $transition.getID());
+         $transition.setIsPass(true);
+end
