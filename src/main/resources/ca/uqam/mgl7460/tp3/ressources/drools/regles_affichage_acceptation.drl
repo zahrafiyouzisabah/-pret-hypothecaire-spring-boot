@@ -1,0 +1,16 @@
+package ca.uqam.mgl7460.tp3.ressources.drools;
+
+unit PretsHypothecairesRuleUnitData;
+
+import ca.uqam.mgl7460.tp3.ressources.types.domaine.Propriete;
+import ca.uqam.mgl7460.tp3.ressources.types.domaine.ProvinceOuTerritoire;
+import ca.uqam.mgl7460.tp3.ressources.types.domaine.Resultat;
+import ca.uqam.mgl7460.tp3.ressources.types.domaine.DemandePret;
+
+rule "Félicitations - votre demande a été acceptée"
+when
+	$demande: DemandePret(resultatTraitement.resultat == Resultat.ACCEPTEE);
+then
+    System.out.println("Félicitations! votre demande a été acceptée");
+	System.out.println("Exécution de la règle " + kcontext.getRule().getName());
+end

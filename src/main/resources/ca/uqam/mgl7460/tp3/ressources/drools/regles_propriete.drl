@@ -1,0 +1,19 @@
+package ca.uqam.mgl7460.tp3.ressources.drools;
+
+unit PretsHypothecairesRuleUnitData;
+
+import ca.uqam.mgl7460.tp3.ressources.types.domaine.Propriete;
+import ca.uqam.mgl7460.tp3.ressources.types.domaine.ProvinceOuTerritoire;
+import ca.uqam.mgl7460.tp3.ressources.types.domaine.Resultat;
+import ca.uqam.mgl7460.tp3.ressources.types.domaine.DemandePret;
+
+rule "Propriété n'est pas au Québec"
+when
+	$demande: DemandePret();
+	$propriete: Propriete($province: adresse.province, $province != ProvinceOuTerritoire.QUEBEC) from $demande.getPropriete();
+then
+	// ajouter un message disant que la propriété n'est pas au bon endroit
+    $demande.getResultatTraitement().setResultat(Resultat.REFUSEE);
+	$demande.getResultatTraitement().ajouteMessage(UtilitaireRegles.PROPRIETE_HORS_QUEBEC);
+	System.out.println("Exécution de la règle " + kcontext.getRule().getName());
+end

@@ -1,0 +1,27 @@
+package ca.uqam.mgl7460.tp3.ressources.drools;
+
+unit PretsHypothecairesRuleUnitData;
+
+import domaine.types.ressources.ca.uqam.mgl7460.tp3.Propriete;
+import domaine.types.ressources.ca.uqam.mgl7460.tp3.ProvinceOuTerritoire;
+import domaine.types.ressources.ca.uqam.mgl7460.tp3.Resultat;
+import domaine.types.ressources.ca.uqam.mgl7460.tp3.DemandePret;
+import java.util.Iterator;
+
+rule "Désolés - votre demande a été refusée"
+salience 10
+when
+	$demande: DemandePret(resultatTraitement.resultat == Resultat.REFUSEE);
+then
+    System.out.println("Nous sommes désolés: votre demande a été refusée");
+	System.out.println("Exécution de la règle " + kcontext.getRule().getName());
+end
+
+rule "affichage des messages d'erreurs"
+salience 1
+when
+	$demande: DemandePret(resultatTraitement.resultat == Resultat.REFUSEE, $messages : resultatTraitement.getMessages());
+then
+    while ($messages.hasNext()) {System.out.println("Erreur: " + $messages.next());};
+	System.out.println("Exécution de la règle " + kcontext.getRule().getName());
+end

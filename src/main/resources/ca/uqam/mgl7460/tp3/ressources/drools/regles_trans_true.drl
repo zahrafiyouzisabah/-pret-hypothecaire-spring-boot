@@ -1,0 +1,8 @@
+package ca.uqam.mgl7460.tp3.ressources.drools;
+
+unit PretsHypothecairesRuleUnitData;
+
+import ca.uqam.mgl7460.tp3.ressources.types.domaine.Resultat;
+import ca.uqam.mgl7460.tp3.ressources.types.domaine.Propriete;
+import ca.uqam.mgl7460.tp3.ressources.types.domaine.ProvinceOuTerritoire;
+import ca.uqam.mgl7460.tp3.ressources.types.domaine.DemandePret;

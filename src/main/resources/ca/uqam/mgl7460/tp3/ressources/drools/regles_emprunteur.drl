@@ -1,0 +1,40 @@
+package ca.uqam.mgl7460.tp3.ressources.drools;
+
+unit PretsHypothecairesRuleUnitData;
+
+import ca.uqam.mgl7460.tp3.ressources.types.domaine.DemandeurPret;
+import ca.uqam.mgl7460.tp3.ressources.types.domaine.DemandePret;
+import ca.uqam.mgl7460.tp3.ressources.types.domaine.Resultat;
+
+rule "Revenu annuel trop faible"
+when
+	$demande: DemandePret();
+	$demandeur: DemandeurPret(revenuAnnuel < UtilitaireRegles.SALAIRE_MINIMAL) from $demande.getDemandeurPret();
+then
+	// ajouter un message disant que le salaire est trop faible
+	$demande.getResultatTraitement().setResultat(Resultat.REFUSEE);
+	$demande.getResultatTraitement().ajouteMessage(UtilitaireRegles.SALAIRE_TROP_FAIBLE );
+	System.out.println("Exécution de la règle " + kcontext.getRule().getName());
+end
+
+rule "Cote de credit trop faible"
+when
+	$demande: DemandePret();
+	$demandeur: DemandeurPret(scoreCredit < UtilitaireRegles.SCORE_CREDIT_MINIMAL) from $demande.getDemandeurPret();
+then
+	// ajouter un message disant que la code de credit est trop faible
+		$demande.getResultatTraitement().setResultat(Resultat.REFUSEE);
+	$demande.getResultatTraitement().ajouteMessage(UtilitaireRegles.SCORE_CREDIT_TROP_FAIBLE);
+	System.out.println("Exécution de la règle " + kcontext.getRule().getName());
+end
+
+rule "Taux d'endettement trop élevé"
+when
+	$demande: DemandePret();
+	$demandeur: DemandeurPret(tauxEndettement > UtilitaireRegles.SEUIL_TAUX_ENDETTEMENT) from $demande.getDemandeurPret();
+then
+	// ajouter un message disant que le taux d'endettement est trop élevé
+	$demande.getResultatTraitement().setResultat(Resultat.REFUSEE);
+	$demande.getResultatTraitement().ajouteMessage(UtilitaireRegles.TAUX_ENDETTEMENT_TROP_ELEVE);
+	System.out.println("Exécution de la règle " + kcontext.getRule().getName());
+end
