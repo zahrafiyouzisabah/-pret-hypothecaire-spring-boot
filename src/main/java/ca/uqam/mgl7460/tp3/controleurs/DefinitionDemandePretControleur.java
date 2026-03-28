@@ -32,7 +32,7 @@ public class DefinitionDemandePretControleur {
      */
 	@GetMapping("/demandeurpret/creer")
 	public String creerDemandeurPret(@RequestParam() String prenom, @RequestParam() String nom,@RequestParam(defaultValue="999-999-999") String nas, @RequestParam() float revenuannuel,@RequestParam() float obligationsannuelles, @RequestParam() int cotecredit ) {
-        return null;
+        return demandeBuilder.creerDemandeurPret(nom, prenom, nas, revenuannuel, cotecredit, obligationsannuelles);
     }        
 
     /**
@@ -42,7 +42,7 @@ public class DefinitionDemandePretControleur {
      */
 	@GetMapping("/demandeurpret/")
 	public DemandeurPret getDemandeurPret(@RequestParam() String id) {
-        return null;
+        return fabrique.getDemandeurPretByID(id);
 	}
 
     /**
@@ -66,7 +66,9 @@ public class DefinitionDemandePretControleur {
     public String creerProprieteAvecAdresse(@RequestParam() String numeroporte, @RequestParam() String numerorue, @RequestParam() String nomrue, 
                                             @RequestParam() String ville, @RequestParam() String codeprovince, @RequestParam() String codepostal,
                                              @RequestParam() float valeurmarche){       
-        return null;
+        String proprieteID = demandeBuilder.creerProprieteAvecAdresse(numeroporte,numerorue, nomrue,ville,codeprovince,codepostal);
+        demandeBuilder.setValeurMarcheProprieteWithId(proprieteID, valeurmarche);
+        return proprieteID;
     }
 
     /**
@@ -92,7 +94,8 @@ public class DefinitionDemandePretControleur {
     @GetMapping("/demandepret/creer")
     public String creerDemandePret(@RequestParam() String iddemandeurpret,@RequestParam() String idpropriete,@RequestParam() float misedefonds, @RequestParam() float prixachat) {
         System.out.println(String.format("Je suis dans la méthode creerDemandePret(id prop: %s, id dem: %s, mise de fonds: %f, prix achat: %f)",iddemandeurpret,idpropriete,misedefonds, prixachat));
-        return null;
+        return demandeBuilder.creerDemandePret(iddemandeurpret, idpropriete, misedefonds, prixachat);
+
     }
 
     /**
@@ -104,7 +107,7 @@ public class DefinitionDemandePretControleur {
     @GetMapping("/demandepret/")
     public DemandePret getDemandePret(@RequestParam() String id) {
         System.out.println(String.format("Je suis dans la méthode getDemandePret(id : %s)",id));
-        return null;
+        return fabrique.getDemandePretByID(id);
     }
 }
     
