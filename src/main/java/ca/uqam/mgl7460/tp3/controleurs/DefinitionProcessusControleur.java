@@ -30,7 +30,7 @@ public class DefinitionProcessusControleur {
      */
 	@GetMapping("/definitionprocessus/creer")
 	public String creerDefinitionProcessus(@RequestParam() String name, @RequestParam(defaultValue="") String description) {
-        return null;
+        return builder.creerDefinitionProcessus(name, description);
 	}
 
     @GetMapping("/definitionprocessus")
@@ -55,8 +55,8 @@ public class DefinitionProcessusControleur {
      */
     @GetMapping("/definitionprocessus/ajoutertache")
     public DefinitionProcessus ajouteDefinitionTache(@RequestParam() String idprocessus, @RequestParam() String idtache) {
-        
-        return null;
+        builder.ajouteTache(idprocessus, idtache);
+        return fabrique.getDefinitionProcessusByID(idprocessus);
     }
 
     /**
@@ -69,8 +69,8 @@ public class DefinitionProcessusControleur {
      */
     @GetMapping("/definitionprocessus/ajoutepremieretache")
     public DefinitionProcessus ajoutePremiereTache(@RequestParam() String idprocessus, @RequestParam() String idtache) {
-       
-        return null;
+       builder.ajoutePremiereTache(idprocessus, idtache);
+       return fabrique.getDefinitionProcessusByID(idprocessus);
     }
 
     /**
@@ -91,7 +91,8 @@ public class DefinitionProcessusControleur {
      */
     @GetMapping("/definitionprocessus/ajoutertransition")
     public DefinitionProcessus ajouteDefinitionTransition(@RequestParam() String idprocessus, @RequestParam() String idtachesource, @RequestParam() String idtachedestination, @RequestParam() String nomfichierregles) {
-        return null;
+        builder.ajouteTransition(idprocessus, idtachesource, idtachedestination, nomfichierregles);
+        return fabrique.getDefinitionProcessusByID(idprocessus);
     }
 
 
