@@ -31,8 +31,7 @@ public class TraitementDemandesControleur {
      */
 	@GetMapping("/instanceprocessus/creer")
 	public String creerInstanceProcessus(@RequestParam() String iddefinitionprocessus, @RequestParam() String iddemandepret ) {
-        
-        return null;
+        return lanceurProcessus.creerInstanceProcessus(iddefinitionprocessus, iddemandepret);
 	}
 
     /**
@@ -46,7 +45,7 @@ public class TraitementDemandesControleur {
      */
 	@GetMapping("/instanceprocessus/lancer")
 	public String lancerInstanceProcessus(@RequestParam() String id) {
-        return null;
+        return lanceurProcessus.lancerInstanceProcessusAvecId(id);
 	}
 
     /**
