@@ -8,19 +8,24 @@ import java.util.UUID;
 public class ProprieteImpl implements Propriete{
 
     private String ID;
+    private static int compteur = 0;
 
     private Adresse adresse;
 
     private float valeurDeMarche;
 
     public ProprieteImpl(Adresse adresse){
-        this.ID = UUID.randomUUID().toString();
+        this.ID = prochaineID();
         this.adresse = adresse;
     }
 
     public ProprieteImpl(Adresse adresse, float valeur){
         this(adresse);
         valeurDeMarche = valeur;
+    }
+
+    private String prochaineID(){
+        return "PROP" + (++compteur);
     }
 
     @Override

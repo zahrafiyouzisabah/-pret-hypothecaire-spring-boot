@@ -13,6 +13,7 @@ import ca.uqam.mgl7460.tp3.ressources.types.utils.Fabrique;
 public class DefinitionProcessusImpl implements DefinitionProcessus {
 
     private String ID;
+    private static int compteur = 0;
 
     private Collection<DefinitionTache> taches;
 
@@ -25,11 +26,15 @@ public class DefinitionProcessusImpl implements DefinitionProcessus {
     private String description;
 
     public DefinitionProcessusImpl(String nom, String description) {
-        this.ID = UUID.randomUUID().toString();
+        this.ID = prochaineID();
         this.nom = nom;
         this.description = description;
         this.taches = new ArrayList<>();
         this.transitions = new HashMap<>();
+    }
+
+    private String prochaineID(){
+        return "DEFPROC" + (++compteur);
     }
     
 

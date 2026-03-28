@@ -7,6 +7,7 @@ import java.util.UUID;
 public class DemandeurPretImpl implements DemandeurPret{
 
     private String ID;
+    private static int compteur = 0;
 
     private String prenom;
 
@@ -21,10 +22,14 @@ public class DemandeurPretImpl implements DemandeurPret{
     private int scoreCredit;
 
     public DemandeurPretImpl(String prenom, String nom, String nas) {
-        this.ID = UUID.randomUUID().toString();
+        this.ID = prochaineID();
         this.prenom = prenom;
         this.nom = nom;
         this.nas = nas;
+    }
+
+    private String prochaineID(){
+        return "DEM" + (++compteur);
     }
 
 

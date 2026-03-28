@@ -14,6 +14,7 @@ import ca.uqam.mgl7460.tp3.ressources.types.utils.Fabrique;
 public class DemandePretImpl implements DemandePret {
 
     private String ID;
+    private static int compteur = 0;
 
     private Instant dateDemande;
 
@@ -39,9 +40,8 @@ public class DemandePretImpl implements DemandePret {
     }
 
     public DemandePretImpl(DemandeurPret demandeur, Propriete propriete){
-        this.ID = UUID.randomUUID().toString();
+        this.ID = prochainNumeroDemande();
         this.dateDemande = Instant.now();
-        this.numeroDemande = prochainNumeroDemande();
         this.demandeurPret = demandeur;
         this.propriete = propriete;
         this.resultatTraitement = Fabrique.getSingletonFabrique().creerResultatTraitement(Resultat.NONDETERMINE);

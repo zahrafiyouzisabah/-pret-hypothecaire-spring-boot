@@ -9,6 +9,7 @@ import java.util.UUID;
 public class DefinitionTacheImpl implements DefinitionTache {
 
     private String ID;
+    private static int compteur = 0;
 
     private String nom;
 
@@ -19,7 +20,7 @@ public class DefinitionTacheImpl implements DefinitionTache {
     private String nomFichierRegles;
 
     public DefinitionTacheImpl(String nom, String description) {
-        this.ID = UUID.randomUUID().toString();
+        this.ID = prochaineID();
         this.nom = nom;
         this.description = description;
     }
@@ -27,6 +28,10 @@ public class DefinitionTacheImpl implements DefinitionTache {
     public DefinitionTacheImpl(String nom, String description, TraitementTache traitementTache){
         this(nom, description);
         this.traitementTache = traitementTache;
+    }
+
+    private String prochaineID(){
+        return "DEFTAC" + (++compteur);
     }
 
     public DefinitionTacheImpl(String nom, String description, String nomFichier){
